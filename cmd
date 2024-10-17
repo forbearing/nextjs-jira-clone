@@ -9,3 +9,4 @@ bunx --bun shadcn add button
 bun run build
 
 bun --no-cache install react-hook-form zod @hookform/resolvers
+bun add hono
