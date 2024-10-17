@@ -1,7 +1,7 @@
+'use client'
+
+import { SignUpCard } from '@/features/auth/components/sign-up-card'
+
 export default () => {
-  return (
-    <div>
-      <h1>Sign Up</h1>
-    </div>
-  )
+  return <SignUpCard />
 }
