@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
+import QueryProviders from '@/components/query-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,14 +30,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          inter.className,
-          'min-h-screen antialiased',
-          // `${geistSans.variable} ${geistMono.variable} antialiased`,
-        )}
-      >
-        {children}
+      <body className={cn(inter.className, 'min-h-screen antialiased')}>
+        <QueryProviders>{children}</QueryProviders>
       </body>
     </html>
   )

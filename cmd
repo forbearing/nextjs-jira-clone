@@ -10,3 +10,5 @@ bun run build
 
 bun --no-cache install react-hook-form zod @hookform/resolvers
 bun add hono
+bun add @tanstack/react-query
+bun add @hono/zod-validator
