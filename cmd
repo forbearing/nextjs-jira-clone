@@ -12,3 +12,5 @@ bun --no-cache install react-hook-form zod @hookform/resolvers
 bun add hono
 bun add @tanstack/react-query
 bun add @hono/zod-validator
+bun add node-appwrite
+bun add server-only
