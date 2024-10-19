@@ -1,45 +1,20 @@
-'use client'
+'use server'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
-import { useCurrent } from '@/features/auth/api/use-current'
-import { useLogout } from '@/features/auth/api/use-logout'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { getCurrent } from '@/features/auth/actions'
+import { UserButton } from '@/features/auth/components/user-button'
+import { logger } from '@/lib/logger'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
-  const router = useRouter()
-  const { data, isLoading } = useCurrent()
-  const { mutate } = useLogout()
+export default async function Home() {
+  const user = await getCurrent()
 
-  useEffect(() => {
-    if (!data && !isLoading) {
-      router.push('/sign-in')
-    }
-  }, [data])
+  // console.log(user)
+  // logger.info(user)
+  if (!user) redirect('/sign-in')
 
   return (
     <div>
-      only visiable to authorized users.
-      <Button onClick={() => mutate()}>Logout.</Button>
-    </div>
-  )
-
-  return (
-    <div className="space-y-2">
-      <Button>hello</Button>
-      <Button size="xs">hello</Button>
-      <Button disabled>hello</Button>
-      <Button variant="destructive">destructive</Button>
-      <Button variant="outline">outline</Button>
-      <Button variant="secondary">secondary</Button>
-      <Button variant="ghost">ghost</Button>
-      <Button variant="muted">muted</Button>
-      <Button variant="teritary">teritary</Button>
-
-      <Input />
-      <Select />
+      <UserButton />
     </div>
   )
 }

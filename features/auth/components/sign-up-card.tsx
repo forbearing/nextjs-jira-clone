@@ -1,3 +1,5 @@
+'use client'
+
 import { DottedSeparator } from '@/components/dotted-separator'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,7 +15,7 @@ import { registerSchema } from '../schema'
 import { userRegister } from '../api/use-register'
 
 export const SignUpCard = () => {
-  const { mutate } = userRegister()
+  const { mutate, isPending } = userRegister()
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -53,7 +55,7 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="email" placeholder="Enter your email" disabled={false} />
+                    <Input {...field} type="email" placeholder="Enter your email" disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -65,7 +67,7 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="text" placeholder="Enter your name" disabled={false} />
+                    <Input {...field} type="text" placeholder="Enter your name" disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -77,25 +79,25 @@ export const SignUpCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} type="password" placeholder="Enter password" disabled={false} />
+                    <Input {...field} type="password" placeholder="Enter password" disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button disabled={false} size="lg" className="w-full">
-              Login
+            <Button disabled={isPending} size="lg" className="w-full">
+              Register
             </Button>
           </form>
         </Form>
       </CardContent>
       <DottedSeparator className="px-7" />
       <CardContent className="flex flex-col gap-y-4 p-7">
-        <Button variant="secondary" size="lg" className="w-full" disabled={false}>
+        <Button variant="secondary" size="lg" className="w-full" disabled={isPending}>
           <FcGoogle className="mr-2 size-5" />
           Login with Google
         </Button>
-        <Button variant="secondary" size="lg" className="w-full" disabled={false}>
+        <Button variant="secondary" size="lg" className="w-full" disabled={isPending}>
           <FaGithub className="mr-2 size-5" />
           Login with Github
         </Button>

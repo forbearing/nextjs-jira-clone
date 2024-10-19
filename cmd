@@ -3,14 +3,16 @@ bunx --bun shadcn --version
 bunx --bun shadcn init
 bun install --no-cache -D eslint prettier eslint-plugin-react eslint-plugin-prettier eslint-config-prettier prettier-plugin-tailwindcss
 
-bunx --bun shadcn add button
+bunx --bun --no-cache shadcn add button
+bunx --bun --no-cache shadcn add dropdown-menu
 
 
 bun run build
 
 bun --no-cache install react-hook-form zod @hookform/resolvers
-bun add hono
-bun add @tanstack/react-query
-bun add @hono/zod-validator
-bun add node-appwrite
-bun add server-only
+bun add --no-cache hono
+bun add --no-cache @tanstack/react-query
+bun add --no-cache @hono/zod-validator
+bun add --no-cache node-appwrite
+bun add --no-cache server-only
+bun add --no-cache pino pino-pretty next-logger
