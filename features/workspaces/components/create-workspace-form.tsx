@@ -15,12 +15,14 @@ import React, { useRef } from 'react'
 import Image from 'next/image'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { LucideImage } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface props {
   onCancel?: () => void
 }
 
 export const CreateWorkspaceForm = ({ onCancel }: props) => {
+  const router = useRouter()
   const { mutate, isPending } = useCreateWorkspace()
   const inputRef = useRef<HTMLInputElement>(null)
   const form = useForm<z.infer<typeof createWorkspaceSchema>>({
@@ -38,9 +40,10 @@ export const CreateWorkspaceForm = ({ onCancel }: props) => {
     mutate(
       { form: finalValues },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           form.reset()
-          // TODO: redirect to workspaces
+          // TODO: redirect to new workspace
+          router.push(`/workspaces/${data.$id}`)
         },
       },
     )
