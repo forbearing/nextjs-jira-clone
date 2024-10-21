@@ -1,6 +1,6 @@
 'use server'
 
-import { getCurrent } from '@/features/auth/actions'
+import { getCurrent } from '@/features/auth/queries'
 import { getWorkspace } from '@/features/workspaces/actions'
 import { redirect } from 'next/navigation'
 
