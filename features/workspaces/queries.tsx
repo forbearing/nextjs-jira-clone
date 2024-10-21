@@ -7,7 +7,7 @@ import { DATABASE_ID, MEMBER_ID, WORKSPACE_ID } from '@/config'
 import { getMember } from '../members/utils'
 import { Workspace } from './types'
 
-export const getWorkspace = async () => {
+export const getWorkspaces = async () => {
   try {
     const client = new Client()
       .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
@@ -35,7 +35,7 @@ export const getWorkspace = async () => {
   }
 }
 
-export const getWorkspaceById = async ({ workspaceId }: { workspaceId: string }) => {
+export const getWorkspace = async ({ workspaceId }: { workspaceId: string }) => {
   try {
     const client = new Client()
       .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)

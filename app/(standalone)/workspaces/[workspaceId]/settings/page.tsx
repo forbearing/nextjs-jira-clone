@@ -1,6 +1,6 @@
 import { getCurrent } from '@/features/auth/queries'
-import { getWorkspaceById } from '@/features/workspaces/actions'
 import { EditWorkspaceForm } from '@/features/workspaces/components/edit-workspace-form'
+import { getWorkspace } from '@/features/workspaces/queries'
 import { redirect } from 'next/navigation'
 
 interface props {
@@ -13,7 +13,7 @@ export default async ({ params }: props) => {
   const user = await getCurrent()
   if (!user) redirect('/sign-in')
 
-  const initialValue = await getWorkspaceById({ workspaceId: params.workspaceId })
+  const initialValue = await getWorkspace({ workspaceId: params.workspaceId })
   if (!initialValue) redirect(`/workspaces/${params.workspaceId}`)
 
   return (
