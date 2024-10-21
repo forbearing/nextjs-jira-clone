@@ -9,14 +9,14 @@ import { DottedSeparator } from '@/components/dotted-separator'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useCreateWorkspace } from '../api/use-create-workspace'
 import React, { useRef } from 'react'
 import Image from 'next/image'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { LucideImage } from 'lucide-react'
+import { LucideArrowLeft, LucideImage } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Workspace } from '../types'
+import { useUpdateWorkspace } from '../api/use-update-workspace'
 
 interface props {
   onCancel?: () => void
@@ -25,7 +25,7 @@ interface props {
 
 export const EditWorkspaceForm = ({ onCancel, initialValues }: props) => {
   const router = useRouter()
-  const { mutate, isPending } = useCreateWorkspace()
+  const { mutate, isPending } = useUpdateWorkspace()
   const inputRef = useRef<HTMLInputElement>(null)
   const form = useForm<z.infer<typeof updateWorkspaceSchema>>({
     resolver: zodResolver(updateWorkspaceSchema),
@@ -38,7 +38,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: props) => {
   const onSumbit = (values: z.infer<typeof updateWorkspaceSchema>) => {
     const finalValues = {
       ...values,
-      image: values.image instanceof File ? values.image : undefined,
+      image: values.image instanceof File ? values.image : '',
     }
     mutate(
       { form: finalValues, param: { workspaceId: initialValues.$id } },
@@ -61,7 +61,15 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: props) => {
 
   return (
     <Card className="h-full w-full border-none shadow-none">
-      <CardHeader className="flex p-7">
+      <CardHeader className="flex flex-row items-center gap-x-4 space-y-0 p-7">
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}
+        >
+          <LucideArrowLeft className="size-4" />
+          Back
+        </Button>
         <CardTitle className="text-xl font-bold">{initialValues.name}</CardTitle>
       </CardHeader>
       <DottedSeparator className="px-7" />
@@ -115,16 +123,34 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: props) => {
                           className="hidden"
                           onChange={handleImageChange}
                         />
-                        <Button
-                          type="button"
-                          disabled={isPending}
-                          variant="teritary"
-                          size="xs"
-                          className="mt-2 w-fit"
-                          onClick={() => inputRef.current?.click()}
-                        >
-                          Upload Image
-                        </Button>
+                        {field.value ? (
+                          <Button
+                            type="button"
+                            disabled={isPending}
+                            variant="destructive"
+                            size="xs"
+                            className="mt-2 w-fit"
+                            onClick={() => {
+                              field.onChange(null)
+                              if (inputRef.current) {
+                                inputRef.current.value = ''
+                              }
+                            }}
+                          >
+                            Remove Image
+                          </Button>
+                        ) : (
+                          <Button
+                            type="button"
+                            disabled={isPending}
+                            variant="teritary"
+                            size="xs"
+                            className="mt-2 w-fit"
+                            onClick={() => inputRef.current?.click()}
+                          >
+                            Upload Image
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -144,7 +170,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: props) => {
                 Cancel
               </Button>
               <Button type="submit" size="lg" variant="primary" disabled={isPending}>
-                Create Workspace
+                Save Changes
               </Button>
             </div>
           </form>

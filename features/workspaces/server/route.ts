@@ -61,6 +61,7 @@ const app = new Hono()
     if (!member || member.role != MemberRole.ADMIN) {
       return c.json({ error: 'Unauthorized' }, 401)
     }
+
     let uploadImageUrl: string | undefined
     if (image instanceof File) {
       const file = await storage.createFile(IMAGE_BUCKET_ID, ID.unique(), image)
@@ -69,6 +70,7 @@ const app = new Hono()
     } else {
       uploadImageUrl = image
     }
+
     const workspace = await databases.updateDocument(DATABASE_ID, WORKSPACE_ID, workspaceId, {
       name,
       imageUrl: uploadImageUrl,
