@@ -12,9 +12,7 @@ interface props {
 export default async ({ params }: props) => {
   const user = await getCurrent()
   if (!user) redirect('/sign-in')
-
   const initialValue = await getWorkspace({ workspaceId: params.workspaceId })
-  if (!initialValue) redirect(`/workspaces/${params.workspaceId}`)
 
   return (
     <div className="w-full lg:max-w-xl">

@@ -10,12 +10,10 @@ import { usePathname } from 'next/navigation'
 import { RiAddCircleFill } from 'react-icons/ri'
 
 export const Projects = () => {
-  const project = null // TODO: Use the usePorjectId hook;
   const pathname = usePathname()
   const { open } = useCreateProjectModal()
   const workspaceId = useWorkspaceId()
   const { data } = useGetProjects({ workspaceId })
-  console.log('projects:', data)
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
@@ -26,7 +24,7 @@ export const Projects = () => {
         />
       </div>
       {data?.documents.map((project) => {
-        const href = `/workspaces/${workspaceId}/projects/${project.id}`
+        const href = `/workspaces/${workspaceId}/projects/${project.$id}`
         const isActive = pathname === href
 
         return (
