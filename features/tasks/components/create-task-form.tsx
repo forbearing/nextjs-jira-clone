@@ -152,7 +152,7 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: prop
                         {projectOptions.map((project) => (
                           <SelectItem key={project.id} value={project.id}>
                             <div className="flex items-center gap-x-2">
-                              <ProjectAvatar className="size-6" name={project.name} image={project.imageUrl} />
+                              <ProjectAvatar className="size-6" name={project.name} imageUrl={project.imageUrl} />
                               {project.name}
                             </div>
                           </SelectItem>

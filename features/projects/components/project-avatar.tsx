@@ -3,16 +3,16 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 interface props {
-  image?: string
+  imageUrl?: string
   name: string
   className?: string
   fallbackClassName?: string
 }
-export const ProjectAvatar = ({ image, name, className, fallbackClassName }: props) => {
-  if (image) {
+export const ProjectAvatar = ({ imageUrl, name, className, fallbackClassName }: props) => {
+  if (imageUrl) {
     return (
       <div className={cn('relative size-5 overflow-hidden rounded-md', className)}>
-        <Image src={image} alt={name} fill className="object-cover" />
+        <Image src={imageUrl} alt={name} fill className="object-cover" />
       </div>
     )
   }

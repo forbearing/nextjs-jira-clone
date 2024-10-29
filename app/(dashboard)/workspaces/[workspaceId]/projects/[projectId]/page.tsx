@@ -19,7 +19,7 @@ export default async ({ params }: { params: { projectId: string } }) => {
     <div className="flex flex-col gap-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-2">
-          <ProjectAvatar name={initialValues.name} image={initialValues.imageUrl} className="size-8" />
+          <ProjectAvatar name={initialValues.name} imageUrl={initialValues.imageUrl} className="size-8" />
           <p className="text-xl font-semibold">{initialValues.name}</p>
         </div>
         <div>
