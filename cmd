@@ -19,3 +19,4 @@ bun add --no-cache pino pino-pretty next-logger
 bun add --no-cache @radix-ui/react-visually-hidden
 bun add --no-cache react-use
 bun add --no-cache nuqs
+bun add --no-cache date-fns

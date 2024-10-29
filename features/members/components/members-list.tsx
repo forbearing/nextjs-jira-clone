@@ -4,7 +4,7 @@ import { DottedSeparator } from '@/components/dotted-separator'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { useGetMember } from '@/features/members/api/use-get-member'
+import { useGetMembers } from '@/features/members/api/use-get-member'
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
 import { LucideArrowLeft, LucideMoreVertical } from 'lucide-react'
 import Link from 'next/link'
@@ -18,7 +18,7 @@ import { useConfirm } from '@/hooks/use-confirm'
 
 export const MembersList = () => {
   const workspaceId = useWorkspaceId()
-  const { data } = useGetMember({ workspaceId })
+  const { data } = useGetMembers({ workspaceId })
   const [ConfirmDialog, confirm] = useConfirm({
     title: 'Remove member',
     message: 'This member will be removed from the workspace.',
