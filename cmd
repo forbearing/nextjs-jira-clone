@@ -21,3 +21,4 @@ bun add --no-cache @radix-ui/react-visually-hidden
 bun add --no-cache react-use
 bun add --no-cache nuqs
 bun add --no-cache date-fns
+bun add --no-cache @hello-pangea/dnd
