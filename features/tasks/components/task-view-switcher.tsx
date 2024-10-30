@@ -3,15 +3,15 @@
 import { DottedSeparator } from '@/components/dotted-separator'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { LucideLoader, LucidePlus } from 'lucide-react'
-import { useCreateTaskModal } from '../hooks/use-create-project-modal'
-import { useGetTasks } from '../api/use-get-tasks'
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
+import { LucideLoader, LucidePlus } from 'lucide-react'
 import { useQueryState } from 'nuqs'
-import { DataFilters } from './data-filters'
+import { useGetTasks } from '../api/use-get-tasks'
+import { useCreateTaskModal } from '../hooks/use-create-task-modal'
 import { useTaskFilters } from '../hooks/use-task-filters'
-import { DataTable } from './data-table'
 import { columns } from './columns'
+import { DataFilters } from './data-filters'
+import { DataTable } from './data-table'
 
 export const TaskViewSwitcher = () => {
   const [{ status, assigneeId, projectId, dueDate }] = useTaskFilters()

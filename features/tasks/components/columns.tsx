@@ -38,7 +38,7 @@ export const columns: ColumnDef<Task>[] = [
       )
     },
     cell: ({ row }) => {
-      const project = row.original
+      const project = row.original.project
       return (
         <div className="flex items-center gap-x-2 text-sm font-medium">
           <ProjectAvatar name={project.name} imageUrl={project.imageUrl} className="size-6" />
