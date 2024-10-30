@@ -12,6 +12,7 @@ bun run build
 bun --no-cache install react-hook-form zod @hookform/resolvers
 bun add --no-cache hono
 bun add --no-cache @tanstack/react-query
+bun add --no-cache @tanstack/react-table
 bun add --no-cache @hono/zod-validator
 bun add --no-cache node-appwrite
 bun add --no-cache server-only
