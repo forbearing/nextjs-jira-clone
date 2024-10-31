@@ -31,7 +31,7 @@ export default async ({ params }: { params: { projectId: string } }) => {
           </Button>
         </div>
       </div>
-      <TaskViewSwitcher />
+      <TaskViewSwitcher hideProjectFilter />
     </div>
   )
 }
