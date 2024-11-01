@@ -1,7 +1,7 @@
 import { ResponsiveModal } from '@/components/responsive-modal'
 import { Button, ButtonProps } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 interface props {
   title: string
@@ -21,17 +21,18 @@ export const useConfirm = ({
     })
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setPromise(null)
-  }
-  const handleConfirm = () => {
+  }, [promise])
+  const handleConfirm = useCallback(() => {
     promise?.resolve(true)
     handleClose()
-  }
-  const handleCancel = () => {
+  }, [promise])
+  const handleCancel = useCallback(() => {
     promise?.resolve(false)
     handleClose()
-  }
+  }, [promise])
+
   const ConfirmationDialog = () => (
     <ResponsiveModal open={promise != null} onOpenChange={handleClose}>
       <Card className="h-full w-full border-none shadow-none">

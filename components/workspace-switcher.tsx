@@ -7,11 +7,12 @@ import { WorkspaceAvatar } from '@/features/workspaces/components/workspace-avat
 import { useRouter } from 'next/navigation'
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
 import { useCreateWorkspaceModal } from '@/features/workspaces/hooks/use-create-workspace-modal'
+import { useGetWorkspaces } from '@/features/workspaces/api/use-get-workspaces'
 
 export const WorkspaceSwitcher = () => {
   const workspaceId = useWorkspaceId()
   const router = useRouter()
-  const { data: workspaces } = useGetWorkspace()
+  const { data: workspaces } = useGetWorkspaces()
   const { open } = useCreateWorkspaceModal()
 
   const onSelect = (id: string) => {

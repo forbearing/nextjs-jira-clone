@@ -23,4 +23,5 @@ bun add --no-cache nuqs
 bun add --no-cache date-fns
 bun add --no-cache @hello-pangea/dnd
 bun add --no-cache react-big-calendar
+
 bun add --no-cache -D @types/react-big-calendar
