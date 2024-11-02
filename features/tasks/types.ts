@@ -1,4 +1,3 @@
-import { Project } from 'next/dist/build/swc'
 import { Models } from 'node-appwrite'
 
 export enum TaskStatus {

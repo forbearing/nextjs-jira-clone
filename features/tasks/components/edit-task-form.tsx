@@ -1,23 +1,21 @@
 'use client'
 
+import { DatePicker } from '@/components/date-picker'
+import { DottedSeparator } from '@/components/dotted-separator'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { MemberAvatar } from '@/features/members/components/member-avatar'
+import { ProjectAvatar } from '@/features/projects/components/project-avatar'
+import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { DottedSeparator } from '@/components/dotted-separator'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import React from 'react'
-import { cn } from '@/lib/utils'
-import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
-import { createTaskSchema } from '../schemas'
-import { DatePicker } from '@/components/date-picker'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { MemberAvatar } from '@/features/members/components/member-avatar'
-import { Task, TaskStatus } from '../types'
-import { ProjectAvatar } from '@/features/projects/components/project-avatar'
 import { useUpdateTask } from '../api/use-update-task'
+import { createTaskSchema } from '../schemas'
+import { Task, TaskStatus } from '../types'
 
 interface props {
   onCancel?: () => void
@@ -27,7 +25,6 @@ interface props {
 }
 
 export const EditTaskForm = ({ onCancel, projectOptions, memberOptions, initialValues }: props) => {
-  const workspaceId = useWorkspaceId()
   const { mutate, isPending } = useUpdateTask()
   const form = useForm<z.infer<typeof createTaskSchema>>({
     resolver: zodResolver(createTaskSchema.omit({ workspaceId: true, description: true })),

@@ -1,11 +1,12 @@
 import { MemberAvatar } from '@/features/members/components/member-avatar'
-import { cn } from '@/lib/utils'
-import { TaskStatus } from '../types'
+import { Member } from '@/features/members/types'
 import { ProjectAvatar } from '@/features/projects/components/project-avatar'
 import { Project } from '@/features/projects/types'
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
+import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { TaskStatus } from '../types'
 
 const statusColorMap: Record<TaskStatus, string> = {
   [TaskStatus.BACKLOG]: 'border-l-pink-500',
@@ -23,7 +24,7 @@ export const EventCard = ({
   status,
 }: {
   title: string
-  assignee: any
+  assignee: Member
   project: Project
   status: TaskStatus
   id: string
