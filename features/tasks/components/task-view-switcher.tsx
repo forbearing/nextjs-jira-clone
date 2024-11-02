@@ -3,20 +3,21 @@
 import { DottedSeparator } from '@/components/dotted-separator'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useProjectId } from '@/features/projects/hooks/use-project-id'
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id'
 import { LucideLoader, LucidePlus } from 'lucide-react'
 import { useQueryState } from 'nuqs'
+import { useCallback } from 'react'
+import { useBulkUpdateTasks } from '../api/use-bulk-update-tasks'
 import { useGetTasks } from '../api/use-get-tasks'
 import { useCreateTaskModal } from '../hooks/use-create-task-modal'
 import { useTaskFilters } from '../hooks/use-task-filters'
-import { columns } from './columns'
-import { DataFilters } from './data-filters'
-import { DataTable } from './data-table'
-import { DataKanban } from './data-kanban'
-import { useCallback } from 'react'
 import { TaskStatus } from '../types'
-import { useBulkUpdateTasks } from '../api/use-bulk-update-tasks'
+import { columns } from './columns'
 import { DataCalendar } from './data-calendar'
+import { DataFilters } from './data-filters'
+import { DataKanban } from './data-kanban'
+import { DataTable } from './data-table'
 
 export const TaskViewSwitcher = ({ hideProjectFilter }: { hideProjectFilter?: boolean }) => {
   const [{ status, assigneeId, projectId, dueDate }] = useTaskFilters()
@@ -24,11 +25,12 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: { hideProjectFilter?: bo
     defaultValue: 'table',
   })
   const workspaceId = useWorkspaceId()
+  const paramProjectId = useProjectId()
   const { open } = useCreateTaskModal()
   const { mutate: bulkUpdate } = useBulkUpdateTasks()
   const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
     workspaceId,
-    projectId,
+    projectId: paramProjectId || projectId,
     assigneeId,
     status,
     dueDate,
